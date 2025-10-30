@@ -1,17 +1,61 @@
-[gd_scene load_steps=39 format=3 uid="uid://bbmaa5jpgbj5t"]
+[gd_scene load_steps=53 format=3 uid="uid://bbmaa5jpgbj5t"]
 
 [ext_resource type="Script" uid="uid://wyxhi8q3i562" path="res://assets/script/player.gd" id="1_ipdm4"]
 [ext_resource type="Texture2D" uid="uid://bttki02s0gqxp" path="res://assets/sprite/Outline/120x80_PNGSheets/_Fall.png" id="2_022bn"]
 [ext_resource type="Texture2D" uid="uid://cqstpljalkgvv" path="res://assets/sprite/Outline/120x80_PNGSheets/_Idle.png" id="2_jn7ie"]
+[ext_resource type="PackedScene" uid="uid://b8fuyg66qg8xu" path="res://assets/scene/attack_hitbox.tscn" id="2_neqwl"]
+[ext_resource type="Texture2D" uid="uid://b6bmpc0fol20" path="res://assets/sprite/Outline/120x80_PNGSheets/_Attack2.png" id="2_srhnk"]
 [ext_resource type="Texture2D" uid="uid://dqyyupxnlct5t" path="res://assets/sprite/Outline/120x80_PNGSheets/_Run.png" id="3_1rsa0"]
 [ext_resource type="Texture2D" uid="uid://bboo6svkkoccr" path="res://assets/sprite/Outline/120x80_PNGSheets/_Jump.png" id="3_6fxyf"]
+[ext_resource type="Texture2D" uid="uid://nndj2px2aml6" path="res://assets/sprite/Outline/120x80_PNGSheets/_Attack.png" id="3_661wk"]
 [ext_resource type="Script" uid="uid://d1l5nbjqdnwiu" path="res://assets/script/state_machine.gd" id="3_jn7ie"]
 [ext_resource type="Script" uid="uid://02w4fpe30b6g" path="res://assets/idle.gd" id="4_gb3uv"]
 [ext_resource type="Script" uid="uid://ba85bydb6ym17" path="res://assets/scene/jump.gd" id="6_6fxyf"]
 [ext_resource type="Script" uid="uid://cfm1j0ffhc50a" path="res://assets/scene/move.gd" id="6_h4qwe"]
+[ext_resource type="Script" uid="uid://cwyxce4krn64b" path="res://assets/scene/attack.gd" id="10_0fuox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfgap"]
 size = Vector2(7, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phmki"]
+atlas = ExtResource("2_srhnk")
+region = Rect2(10, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nshm7"]
+atlas = ExtResource("2_srhnk")
+region = Rect2(130, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um21y"]
+atlas = ExtResource("2_srhnk")
+region = Rect2(250, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a1wu"]
+atlas = ExtResource("2_srhnk")
+region = Rect2(370, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b55il"]
+atlas = ExtResource("2_srhnk")
+region = Rect2(490, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wxy7"]
+atlas = ExtResource("2_srhnk")
+region = Rect2(610, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2etem"]
+atlas = ExtResource("3_661wk")
+region = Rect2(10, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agsvx"]
+atlas = ExtResource("3_661wk")
+region = Rect2(130, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gsj3"]
+atlas = ExtResource("3_661wk")
+region = Rect2(250, 0, 110, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61luu"]
+atlas = ExtResource("3_661wk")
+region = Rect2(370, 0, 110, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_022bn"]
 atlas = ExtResource("2_022bn")
@@ -120,6 +164,46 @@ region = Rect2(1087, 0, 100, 80)
 [sub_resource type="SpriteFrames" id="SpriteFrames_022bn"]
 animations = [{
 "frames": [{
+"duration": 1.01,
+"texture": SubResource("AtlasTexture_phmki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nshm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_um21y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a1wu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b55il")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wxy7")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2etem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agsvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gsj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61luu")
+}],
+"loop": false,
+"name": &"attack_mov",
+"speed": 15.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_022bn")
 }, {
@@ -216,6 +300,11 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ifqy8"]
@@ -224,6 +313,14 @@ animations = [{
 physics_interpolation_mode = 2
 script = ExtResource("1_ipdm4")
 
+[node name="attack point" type="Marker2D" parent="."]
+position = Vector2(14.000001, -6.0000005)
+scale = Vector2(0.48, 0.48)
+
+[node name="attackhitbox" parent="attack point" instance=ExtResource("2_neqwl")]
+position = Vector2(1.9073486e-06, 1.9073486e-06)
+scale = Vector2(2.0833333, 2.0833333)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-0.5, -4.5)
@@ -231,13 +328,11 @@ shape = SubResource("RectangleShape2D_cfgap")
 one_way_collision = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2, -15)
+position = Vector2(-1, -15)
 scale = Vector2(0.48, 0.48)
 sprite_frames = SubResource("SpriteFrames_022bn")
-animation = &"move"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.7526738
-offset = Vector2(3.26, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -264,14 +359,14 @@ script = ExtResource("6_6fxyf")
 sprite = NodePath("../../Sprite2D")
 player = NodePath("../..")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(1, -39)
-scale = Vector2(57, 43)
-texture = ExtResource("2_jn7ie")
-hframes = 10
-region_enabled = true
-region_rect = Rect2(16, 0, 1184, 80)
+[node name="attack" type="Node" parent="State Machine" node_paths=PackedStringArray("sprite", "player", "attack_hitbox")]
+script = ExtResource("10_0fuox")
+sprite = NodePath("../../Sprite2D")
+player = NodePath("../..")
+attack_hitbox = NodePath("../../attack point/attackhitbox")
+metadata/_custom_type_script = "uid://jwtj06q3xe5j"
 
 [connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="Sprite2D" to="State Machine/Jump" method="_on_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="Sprite2D" to="State Machine/attack" method="_on_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -13,3 +13,5 @@ func update(delta):
 	if Input.is_action_pressed("ui_accept") && player.is_on_floor():
 		print("hi")
 		state_machine.change_state("jump")
+	if Input.is_action_just_pressed("left click"):
+		state_machine.change_state("attack")

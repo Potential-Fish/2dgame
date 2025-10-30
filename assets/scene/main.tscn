@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhxjhx5ap0od6"]
+[gd_scene load_steps=8 format=3 uid="uid://bhxjhx5ap0od6"]
 
 [ext_resource type="Texture2D" uid="uid://nxat5pmt618t" path="res://assets/sprite/icon.svg" id="1_821e4"]
 [ext_resource type="PackedScene" uid="uid://bbmaa5jpgbj5t" path="res://assets/scene/player.tscn" id="2_tb8ar"]
 [ext_resource type="PackedScene" uid="uid://dc5pmsmkaxnw3" path="res://assets/scene/jump_pad.tscn" id="3_0nmyk"]
 [ext_resource type="Script" uid="uid://u6okdqp47yh5" path="res://assets/scene/camera_2d.gd" id="3_uu0fw"]
 [ext_resource type="PackedScene" uid="uid://c26ujvgfpmmca" path="res://assets/scene/enemy.tscn" id="4_0vk0l"]
-[ext_resource type="PackedScene" uid="uid://d3yulw50ajhye" path="res://assets/scene/area_2d.tscn" id="6_fw18y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb8ar"]
 size = Vector2(128.778, 120.686)
@@ -52,7 +51,7 @@ scale = Vector2(4.45, 4.45)
 position = Vector2(1275, -16)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("4_0vk0l")]
-position = Vector2(-241, -193)
+position = Vector2(1032, -125)
 
 [node name="CollisionShape2D" parent="CharacterBody2D2/Area2D" index="0"]
 position = Vector2(-1.25, -22)
@@ -68,10 +67,6 @@ shape = SubResource("RectangleShape2D_0vk0l")
 position = Vector2(-375, -58.5)
 scale = Vector2(3.15625, 1.16406)
 texture = ExtResource("1_821e4")
-
-[node name="Area2D" parent="." instance=ExtResource("6_fw18y")]
-position = Vector2(906, -149)
-scale = Vector2(1.575, 1.575)
 
 [connection signal="touched_ground" from="player" to="Camera2D" method="_on_character_body_2d_touched_ground"]
 [connection signal="body_entered" from="player/Area2D" to="player" method="_on_area_2d_body_entered"]

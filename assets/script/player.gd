@@ -12,15 +12,18 @@ var star = preload("res://assets/scene/area_2d.tscn")
 func _ready() -> void:
 	$Sprite2D.frame = 5
 func _physics_process(delta: float) -> void:
-	
+	attack_point()
 	if Input.is_action_just_pressed("left click"):
-		spawn_star()
-	
+		#spawn_star()
+		pass
 	if knockback_timer > 0:
-		
+		print(knockback_timer)
 		$".".velocity = -knockback
 		knockback_timer -= delta 
-
+	else:
+		if $"State Machine".current_state != $"State Machine/Move":
+			velocity.x = 0
+		
 
 	
 	if Input.is_action_just_pressed("left"):
@@ -83,3 +86,8 @@ func spawn_star():
 		Star.velocity.y += -1000
 		Star.global_position = global_position
 		Star.scale = Vector2(0.5 ,0.5 )
+func attack_point():
+	if $Sprite2D.flip_h:
+		$"attack point".position.x = -10
+	else:
+		$"attack point".position.x = 10

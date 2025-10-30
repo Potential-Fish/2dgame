@@ -28,7 +28,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		velocity = Vector2.ZERO
 		$CPUParticles2D.emitting = true
 		$Ninjastar.hide()
-		print(body)
+		
 		
 
 
