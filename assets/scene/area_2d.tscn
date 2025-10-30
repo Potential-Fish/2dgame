@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3yulw50ajhye"]
+
+[ext_resource type="Script" uid="uid://dcdj7vttd77i1" path="res://assets/script/area_2d.gd" id="1_22b2r"]
+[ext_resource type="Texture2D" uid="uid://hgrto4xfy5b5" path="res://assets/sprite/ninjastar.png" id="2_4vgmq"]
+[ext_resource type="Texture2D" uid="uid://dnqyc4u160fvp" path="res://assets/sprite/slimeball.png" id="3_4vgmq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vgmq"]
+size = Vector2(48, 41)
+
+[sub_resource type="Curve" id="Curve_4vgmq"]
+_data = [Vector2(0.1511628, 0.9662922), 0.0, 0.0, 0, 0, Vector2(0.9534884, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_22b2r"]
+radius = 25.0
+
+[node name="star" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_22b2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1.5)
+shape = SubResource("RectangleShape2D_4vgmq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 17
+texture = ExtResource("3_4vgmq")
+lifetime = 0.29000000000000004
+one_shot = true
+randomness = 0.45
+direction = Vector2(0, -1)
+spread = 90.0
+initial_velocity_min = 319.59
+initial_velocity_max = 546.39
+scale_amount_curve = SubResource("Curve_4vgmq")
+
+[node name="Ninjastar" type="Sprite2D" parent="."]
+texture = ExtResource("2_4vgmq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_22b2r")
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
