@@ -8,6 +8,8 @@ func enter():
 	await get_tree().create_timer(0.1).timeout
 	
 func physics_update(delta):
+	if Input.is_action_just_pressed("left click"):
+		state_machine.change_state("attack")
 	if player.input_order.size() > 0:
 		player.velocity.x = player.input_order.back() * player.speed * delta
 	if player.velocity.y > 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bbmaa5jpgbj5t"]
+[gd_scene load_steps=58 format=3 uid="uid://bbmaa5jpgbj5t"]
 
 [ext_resource type="Script" uid="uid://wyxhi8q3i562" path="res://assets/script/player.gd" id="1_ipdm4"]
 [ext_resource type="Texture2D" uid="uid://bttki02s0gqxp" path="res://assets/sprite/Outline/120x80_PNGSheets/_Fall.png" id="2_022bn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://02w4fpe30b6g" path="res://assets/idle.gd" id="4_gb3uv"]
 [ext_resource type="Script" uid="uid://ba85bydb6ym17" path="res://assets/scene/jump.gd" id="6_6fxyf"]
 [ext_resource type="Script" uid="uid://cfm1j0ffhc50a" path="res://assets/scene/move.gd" id="6_h4qwe"]
+[ext_resource type="Texture2D" uid="uid://d0vvtev7r5fdt" path="res://assets/sprite/Outline/120x80_PNGSheets/_Jump-Sheet-export1.png" id="8_21pt6"]
 [ext_resource type="Script" uid="uid://cwyxce4krn64b" path="res://assets/scene/attack.gd" id="10_0fuox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfgap"]
@@ -120,6 +121,22 @@ region = Rect2(126, 0, 100, 80)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lak6o"]
 atlas = ExtResource("3_6fxyf")
 region = Rect2(246, 0, 100, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l13nn"]
+atlas = ExtResource("8_21pt6")
+region = Rect2(0, 0, 112, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivq7u"]
+atlas = ExtResource("8_21pt6")
+region = Rect2(112, 0, 112, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vduem"]
+atlas = ExtResource("8_21pt6")
+region = Rect2(224, 0, 112, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrlov"]
+atlas = ExtResource("8_21pt6")
+region = Rect2(336, 0, 112, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0u0r"]
 atlas = ExtResource("3_1rsa0")
@@ -268,6 +285,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_l13nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivq7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vduem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrlov")
+}],
+"loop": false,
+"name": &"jump attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_b0u0r")
 }, {
 "duration": 1.0,
@@ -300,11 +334,6 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 10.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ifqy8"]
@@ -331,8 +360,11 @@ one_way_collision = true
 position = Vector2(-1, -15)
 scale = Vector2(0.48, 0.48)
 sprite_frames = SubResource("SpriteFrames_022bn")
-animation = &"idle"
+animation = &"jump attack"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
+flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		$".".velocity = -knockback
 		knockback_timer -= delta 
 	else:
-		if $"State Machine".current_state != $"State Machine/Move":
+		if $"State Machine".current_state == $"State Machine/idle" :
 			velocity.x = 0
 		
 
