@@ -7,12 +7,20 @@ var direction
 var facing_dir:String = "right"
 var largest
 signal touched_ground
-
+var remote = RemoteTransform2D.new()
 var star = preload("res://assets/scene/area_2d.tscn")
 func _ready() -> void:
 	$Sprite2D.frame = 5
+	add_child(remote)
+	remote.set_remote_node("enemy")
+	remote.use_global_coordinates = true
+	
 func _physics_process(delta: float) -> void:
 	attack_point()
+	#print(remote.global_position)
+	print(remote.get_remote_node())
+	
+	remote.set_update_position(true)
 	if Input.is_action_just_pressed("left click"):
 		#spawn_star()
 		pass
