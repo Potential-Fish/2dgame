@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="default_weapon" load_steps=2 format=3 uid="uid://do0t8d0lua71v"]
+
+[ext_resource type="Script" uid="uid://6i18l22xwn6" path="res://assets/script/default_wep.gd" id="1_dvgbc"]
+
+[resource]
+script = ExtResource("1_dvgbc")
+metadata/_custom_type_script = "uid://6i18l22xwn6"

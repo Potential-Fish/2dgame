@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bbmaa5jpgbj5t"]
+[gd_scene load_steps=58 format=3 uid="uid://bbmaa5jpgbj5t"]
 
 [ext_resource type="Script" uid="uid://wyxhi8q3i562" path="res://assets/script/player.gd" id="1_ipdm4"]
 [ext_resource type="Texture2D" uid="uid://bttki02s0gqxp" path="res://assets/sprite/Outline/120x80_PNGSheets/_Fall.png" id="2_022bn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cfm1j0ffhc50a" path="res://assets/script/move.gd" id="6_h4qwe"]
 [ext_resource type="Texture2D" uid="uid://d0vvtev7r5fdt" path="res://assets/sprite/Outline/120x80_PNGSheets/_Jump-Sheet-export1.png" id="8_21pt6"]
 [ext_resource type="Script" uid="uid://cwyxce4krn64b" path="res://assets/script/attack.gd" id="10_0fuox"]
+[ext_resource type="Script" uid="uid://bsw5y6otke82h" path="res://assets/script/default.gd" id="15_fccq8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfgap"]
 size = Vector2(7, 17)
@@ -336,9 +337,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["player"]]
 physics_interpolation_mode = 2
 script = ExtResource("1_ipdm4")
+weapon = NodePath("weapon")
+
+[node name="weapon" type="Node" parent="."]
+script = ExtResource("15_fccq8")
 
 [node name="attack point" type="Marker2D" parent="."]
 position = Vector2(14.000001, -6.0000005)

@@ -6,7 +6,6 @@ var direction_1 = 1
 @onready var ray_cast_left: RayCast2D = $"RayCast left"
 @onready var ray_cast_right: RayCast2D = $"RayCast right"
 func ready():
-	
 	pass
 func _process(delta: float) -> void:
 
@@ -36,11 +35,13 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("attackHB"):
+		var player = area.get_parent().get_parent()
+		var damage = player.weapon.current_weapon.damage
 		enemy.direction = Vector2(area.global_position - global_position).normalized()
-		take_damage()
+		take_damage(damage)
 		
 		enemy.apply_knockback(enemy.direction,400,0.18)
-func take_damage():
-	stats.health -= 1
-	if stats.health == 0:
+func take_damage(damage:int):
+	stats.health -= damage
+	if stats.health <= 0:
 		queue_free()

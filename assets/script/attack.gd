@@ -2,6 +2,7 @@ extends State
 @export var sprite:AnimatedSprite2D
 @export var player:CharacterBody2D
 @export var attack_hitbox:Area2D
+
 var is_attacking:bool
 #var sword_hitbox = preload("res://assets/scene/attack_hitbox.tscn")
 

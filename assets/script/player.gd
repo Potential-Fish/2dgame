@@ -9,6 +9,7 @@ var largest
 signal touched_ground
 var remote = RemoteTransform2D.new()
 var star = preload("res://assets/scene/area_2d.tscn")
+@export var weapon:Node
 func _ready() -> void:
 	$Sprite2D.frame = 5
 	add_child(remote)
