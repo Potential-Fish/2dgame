@@ -1,22 +1,46 @@
 extends CharacterBody2D
-var direction = 1
+var enemy = Enemy.new()
+@export var stats:Enemy1_stats
+
+var direction_1 = 1
 @onready var ray_cast_left: RayCast2D = $"RayCast left"
 @onready var ray_cast_right: RayCast2D = $"RayCast right"
-
-
-func _physics_process(delta: float) -> void:
-
+func ready():
 	
-	velocity.y += get_gravity().y * delta
-	velocity.x = 20000 * delta * direction
+	pass
+func _process(delta: float) -> void:
+
+	if enemy.health == 0:
+		queue_free()
+func _physics_process(delta: float) -> void:
+	if enemy.knockback_timer > 0:
+		velocity = -enemy.knockback
+		enemy.knockback_timer -= delta 
+		if enemy.knockback_timer <= 0:
+			enemy.knockback = Vector2.ZERO 
+	else:
+			velocity.y += get_gravity().y * delta
+			velocity.x = 10000 * delta * direction_1
+			
+	
+			if ray_cast_left.is_colliding() == false:
+				direction_1 = 1
+			if ray_cast_right.is_colliding() == false:
+				direction_1 = -1
+		
+
 	move_and_slide()
 	
-	if ray_cast_left.is_colliding() == false:
-		direction = 1
-	if ray_cast_right.is_colliding() == false:
-		direction = -1
+	
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("attackHB"):
+		enemy.direction = Vector2(area.global_position - global_position).normalized()
+		take_damage()
 		
-		
-	
-	
-	
+		enemy.apply_knockback(enemy.direction,400,0.18)
+func take_damage():
+	stats.health -= 1
+	if stats.health == 0:
+		queue_free()

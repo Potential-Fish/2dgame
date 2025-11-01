@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8fuyg66qg8xu"]
 
-[ext_resource type="Script" uid="uid://du1ker8xku0kt" path="res://assets/scene/attack_hitbox.gd" id="1_307fv"]
+[ext_resource type="Script" uid="uid://du1ker8xku0kt" path="res://assets/script/attack_hitbox.gd" id="1_307fv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn1pr"]
 
-[node name="Node2D" type="Area2D" node_paths=PackedStringArray("timer")]
+[node name="Node2D" type="Area2D" node_paths=PackedStringArray("timer", "collision") groups=["attackHb"]]
 script = ExtResource("1_307fv")
 timer = NodePath("Timer")
+collision = NodePath("CollisionShape2D")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.09

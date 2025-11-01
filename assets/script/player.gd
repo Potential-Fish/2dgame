@@ -18,7 +18,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	attack_point()
 	#print(remote.global_position)
-	print(remote.get_remote_node())
+	
 	
 	remote.set_update_position(true)
 	if Input.is_action_just_pressed("left click"):

@@ -9,13 +9,13 @@ func enter():
 	#var swordHitBox = sword_hitbox.instantiate()
 	#$"../../attack point".add_child(swordHitBox)
 	attack_hitbox.show()
-	
+	attack_hitbox.collision.disabled = false
 	
 			
 	
 
 func update(_delta:float):
-	print(sprite.animation)
+
 	if is_attacking == false:
 		if player.is_on_floor() == false:
 		
@@ -32,5 +32,6 @@ func physics_update(delta):
 func _on_sprite_2d_animation_finished() -> void:
 		state_machine.change_state("idle")
 		attack_hitbox.hide()
+		attack_hitbox.collision.disabled = true
 func exit():
 	is_attacking = false

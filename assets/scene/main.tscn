@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://nxat5pmt618t" path="res://assets/sprite/icon.svg" id="1_821e4"]
 [ext_resource type="PackedScene" uid="uid://bbmaa5jpgbj5t" path="res://assets/scene/player.tscn" id="2_tb8ar"]
 [ext_resource type="PackedScene" uid="uid://dc5pmsmkaxnw3" path="res://assets/scene/jump_pad.tscn" id="3_0nmyk"]
-[ext_resource type="Script" uid="uid://u6okdqp47yh5" path="res://assets/scene/camera_2d.gd" id="3_uu0fw"]
+[ext_resource type="Script" uid="uid://u6okdqp47yh5" path="res://assets/script/camera_2d.gd" id="3_uu0fw"]
 [ext_resource type="PackedScene" uid="uid://c26ujvgfpmmca" path="res://assets/scene/enemy.tscn" id="4_0vk0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb8ar"]
@@ -52,7 +52,7 @@ position = Vector2(-17.528091, -8.314606)
 scale = Vector2(0.2247191, 0.2247191)
 
 [node name="StaticBody2D2" parent="." instance=ExtResource("3_0nmyk")]
-position = Vector2(866, -31)
+position = Vector2(-2, 139)
 
 [node name="enemy" parent="." instance=ExtResource("4_0vk0l")]
 position = Vector2(334, -158)
@@ -61,7 +61,7 @@ position = Vector2(334, -158)
 position = Vector2(-1.25, -22)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(226, -110)
+position = Vector2(-185, -170)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(-375.5, -55)
@@ -72,8 +72,10 @@ position = Vector2(-375, -58.5)
 scale = Vector2(3.15625, 1.16406)
 texture = ExtResource("1_821e4")
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_0vk0l")]
+position = Vector2(867, -147)
+
 [connection signal="touched_ground" from="player" to="Camera2D" method="_on_character_body_2d_touched_ground"]
-[connection signal="body_entered" from="player/Area2D" to="player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="enemy/Area2D" to="player" method="_on_area_2d_body_entered"]
 [connection signal="replacing_by" from="enemy/Area2D" to="player" method="_on_area_2d_replacing_by"]
 

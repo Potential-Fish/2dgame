@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bbmaa5jpgbj5t"]
+[gd_scene load_steps=57 format=3 uid="uid://bbmaa5jpgbj5t"]
 
 [ext_resource type="Script" uid="uid://wyxhi8q3i562" path="res://assets/script/player.gd" id="1_ipdm4"]
 [ext_resource type="Texture2D" uid="uid://bttki02s0gqxp" path="res://assets/sprite/Outline/120x80_PNGSheets/_Fall.png" id="2_022bn"]
@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bboo6svkkoccr" path="res://assets/sprite/Outline/120x80_PNGSheets/_Jump.png" id="3_6fxyf"]
 [ext_resource type="Texture2D" uid="uid://nndj2px2aml6" path="res://assets/sprite/Outline/120x80_PNGSheets/_Attack.png" id="3_661wk"]
 [ext_resource type="Script" uid="uid://d1l5nbjqdnwiu" path="res://assets/script/state_machine.gd" id="3_jn7ie"]
-[ext_resource type="Script" uid="uid://02w4fpe30b6g" path="res://assets/idle.gd" id="4_gb3uv"]
-[ext_resource type="Script" uid="uid://ba85bydb6ym17" path="res://assets/scene/jump.gd" id="6_6fxyf"]
-[ext_resource type="Script" uid="uid://cfm1j0ffhc50a" path="res://assets/scene/move.gd" id="6_h4qwe"]
+[ext_resource type="Script" uid="uid://02w4fpe30b6g" path="res://assets/script/idle.gd" id="4_gb3uv"]
+[ext_resource type="Script" uid="uid://ba85bydb6ym17" path="res://assets/script/jump.gd" id="6_6fxyf"]
+[ext_resource type="Script" uid="uid://cfm1j0ffhc50a" path="res://assets/script/move.gd" id="6_h4qwe"]
 [ext_resource type="Texture2D" uid="uid://d0vvtev7r5fdt" path="res://assets/sprite/Outline/120x80_PNGSheets/_Jump-Sheet-export1.png" id="8_21pt6"]
-[ext_resource type="Script" uid="uid://cwyxce4krn64b" path="res://assets/scene/attack.gd" id="10_0fuox"]
+[ext_resource type="Script" uid="uid://cwyxce4krn64b" path="res://assets/script/attack.gd" id="10_0fuox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfgap"]
 size = Vector2(7, 17)
@@ -336,8 +336,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifqy8"]
-
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 physics_interpolation_mode = 2
 script = ExtResource("1_ipdm4")
@@ -346,7 +344,7 @@ script = ExtResource("1_ipdm4")
 position = Vector2(14.000001, -6.0000005)
 scale = Vector2(0.48, 0.48)
 
-[node name="attackhitbox" parent="attack point" instance=ExtResource("2_neqwl")]
+[node name="attackhitbox" parent="attack point" groups=["attackHB"] instance=ExtResource("2_neqwl")]
 position = Vector2(1.9073486e-06, 1.9073486e-06)
 scale = Vector2(2.0833333, 2.0833333)
 
@@ -365,12 +363,6 @@ autoplay = "idle"
 frame = 3
 frame_progress = 1.0
 flip_h = true
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -5)
-shape = SubResource("RectangleShape2D_ifqy8")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("3_jn7ie")
@@ -401,4 +393,3 @@ metadata/_custom_type_script = "uid://jwtj06q3xe5j"
 [connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="Sprite2D" to="State Machine/Jump" method="_on_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="Sprite2D" to="State Machine/attack" method="_on_sprite_2d_animation_finished"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
