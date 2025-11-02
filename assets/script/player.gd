@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	
 	remote.set_update_position(true)
 	if Input.is_action_just_pressed("left click"):
-		#spawn_star()
+		spawn_star()
 		pass
 	if knockback_timer > 0:
 		print(knockback_timer)

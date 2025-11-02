@@ -1,13 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhxjhx5ap0od6"]
+[gd_scene load_steps=11 format=3 uid="uid://bhxjhx5ap0od6"]
 
 [ext_resource type="Texture2D" uid="uid://nxat5pmt618t" path="res://assets/sprite/icon.svg" id="1_821e4"]
 [ext_resource type="PackedScene" uid="uid://bbmaa5jpgbj5t" path="res://assets/scene/player.tscn" id="2_tb8ar"]
 [ext_resource type="PackedScene" uid="uid://dc5pmsmkaxnw3" path="res://assets/scene/jump_pad.tscn" id="3_0nmyk"]
 [ext_resource type="Script" uid="uid://u6okdqp47yh5" path="res://assets/script/camera_2d.gd" id="3_uu0fw"]
 [ext_resource type="PackedScene" uid="uid://c26ujvgfpmmca" path="res://assets/scene/enemy.tscn" id="4_0vk0l"]
+[ext_resource type="Script" uid="uid://b0ufopwcpkvn6" path="res://assets/script/enemystats1.gd" id="6_fw18y"]
+[ext_resource type="PackedScene" uid="uid://dcek0xua4512l" path="res://assets/scene/pickup.tscn" id="7_mqc3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb8ar"]
 size = Vector2(128.778, 120.686)
+
+[sub_resource type="Resource" id="Resource_mqc3k"]
+resource_local_to_scene = true
+script = ExtResource("6_fw18y")
+metadata/_custom_type_script = "uid://b0ufopwcpkvn6"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vk0l"]
 size = Vector2(405, 150)
@@ -52,10 +59,11 @@ position = Vector2(-17.528091, -8.314606)
 scale = Vector2(0.2247191, 0.2247191)
 
 [node name="StaticBody2D2" parent="." instance=ExtResource("3_0nmyk")]
-position = Vector2(-2, 139)
+position = Vector2(148, -30)
 
 [node name="enemy" parent="." instance=ExtResource("4_0vk0l")]
-position = Vector2(334, -158)
+position = Vector2(23, -151)
+stats = SubResource("Resource_mqc3k")
 
 [node name="CollisionShape2D" parent="enemy/Area2D" index="0"]
 position = Vector2(-1.25, -22)
@@ -72,8 +80,8 @@ position = Vector2(-375, -58.5)
 scale = Vector2(3.15625, 1.16406)
 texture = ExtResource("1_821e4")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("4_0vk0l")]
-position = Vector2(867, -147)
+[node name="Node2D" parent="." instance=ExtResource("7_mqc3k")]
+position = Vector2(1025, -54)
 
 [connection signal="touched_ground" from="player" to="Camera2D" method="_on_character_body_2d_touched_ground"]
 [connection signal="body_entered" from="enemy/Area2D" to="player" method="_on_area_2d_body_entered"]

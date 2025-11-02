@@ -23,11 +23,9 @@ position = Vector2(-1, -1.5)
 shape = SubResource("RectangleShape2D_4vgmq")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-emitting = false
 amount = 17
 texture = ExtResource("3_4vgmq")
 lifetime = 0.29000000000000004
-one_shot = true
 randomness = 0.45
 direction = Vector2(0, -1)
 spread = 90.0
@@ -36,6 +34,7 @@ initial_velocity_max = 546.39
 scale_amount_curve = SubResource("Curve_4vgmq")
 
 [node name="Ninjastar" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_4vgmq")
 
 [node name="Area2D" type="Area2D" parent="."]
