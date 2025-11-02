@@ -8,9 +8,8 @@ var direction_1 = 1
 func ready():
 	pass
 func _process(delta: float) -> void:
+	$Label.text = str(stats.health)
 
-	if enemy.health == 0:
-		queue_free()
 func _physics_process(delta: float) -> void:
 	if enemy.knockback_timer > 0:
 		velocity = -enemy.knockback
