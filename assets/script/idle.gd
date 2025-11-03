@@ -15,3 +15,4 @@ func update(delta):
 		state_machine.change_state("jump")
 	if Input.is_action_just_pressed("left click"):
 		state_machine.change_state("attack")
+		

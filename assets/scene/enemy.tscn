@@ -1,8 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://c26ujvgfpmmca"]
+[gd_scene load_steps=11 format=3 uid="uid://c26ujvgfpmmca"]
 
 [ext_resource type="Texture2D" uid="uid://nxat5pmt618t" path="res://assets/sprite/icon.svg" id="1_6og4y"]
 [ext_resource type="Script" uid="uid://bdh87dxatjfs7" path="res://assets/script/enemy.gd" id="1_qukd2"]
 [ext_resource type="Resource" uid="uid://b8lvibo4qcwni" path="res://assets/resource/enemystats1.tres" id="2_bd7ao"]
+[ext_resource type="Script" uid="uid://d1l5nbjqdnwiu" path="res://assets/script/state_machine.gd" id="4_m5bc4"]
+[ext_resource type="Script" uid="uid://dgylovh8ioep1" path="res://assets/scene/follow.gd" id="5_qx8pe"]
+[ext_resource type="Script" uid="uid://d0sw4312urigb" path="res://assets/scene/idle_enemy.gd" id="6_28oub"]
+[ext_resource type="Texture2D" uid="uid://dnqyc4u160fvp" path="res://assets/sprite/slimeball.png" id="7_qx8pe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5bc4"]
+size = Vector2(201, 124)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qukd2"]
 size = Vector2(128.5, 121)
@@ -14,23 +21,39 @@ size = Vector2(133, 134)
 script = ExtResource("1_qukd2")
 stats = ExtResource("2_bd7ao")
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(167.5, -1)
+shape = SubResource("RectangleShape2D_m5bc4")
+
 [node name="marker left" type="Marker2D" parent="."]
 position = Vector2(-76, -1)
 scale = Vector2(6.92, 1.52)
+
+[node name="RayCast left" type="RayCast2D" parent="marker left"]
+target_position = Vector2(-0.289017, 63.1579)
+
+[node name="RayCast left wall" type="RayCast2D" parent="marker left"]
+position = Vector2(0, 24.535)
+rotation = 1.5707964
+target_position = Vector2(0, 1.27)
 
 [node name="marker right" type="Marker2D" parent="."]
 position = Vector2(85, -1)
 scale = Vector2(6.92, 1.52)
 
-[node name="RayCast left" type="RayCast2D" parent="."]
-position = Vector2(-76, -1)
-scale = Vector2(6.92, 1.52)
+[node name="RayCast right" type="RayCast2D" parent="marker right"]
+position = Vector2(0.28901768, 0.65789473)
 target_position = Vector2(-0.289017, 63.1579)
 
-[node name="RayCast right" type="RayCast2D" parent="."]
-position = Vector2(87, 0)
-scale = Vector2(6.92, 1.52)
-target_position = Vector2(-0.289017, 63.1579)
+[node name="RayCast right wall" type="RayCast2D" parent="marker right"]
+position = Vector2(0, 25.315)
+rotation = -1.5707964
+target_position = Vector2(0, 1.28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.75, -1.5)
@@ -53,4 +76,39 @@ offset_top = -104.0
 offset_right = 23.0
 offset_bottom = -81.0
 
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+script = ExtResource("4_m5bc4")
+inital_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://d1l5nbjqdnwiu"
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_qx8pe")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://jwtj06q3xe5j"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_28oub")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://jwtj06q3xe5j"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
+z_index = -1
+position = Vector2(1, -1)
+emitting = false
+texture = ExtResource("7_qx8pe")
+one_shot = true
+speed_scale = 3.3
+explosiveness = 0.41
+randomness = 0.19
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.62
+initial_velocity_max = 195.88
+angular_velocity_min = -0.8
+
+[connection signal="timeout" from="Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D2" to="StateMachine/Idle" method="_on_area_2d_2_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="StateMachine/Follow" method="_on_area_2d_2_body_exited"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

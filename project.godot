@@ -15,6 +15,10 @@ run/main_scene="uid://bhxjhx5ap0od6"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://assets/sprite/icon.svg"
 
+[autoload]
+
+Hitstop="*res://assets/script/Hitstop.gd"
+
 [input]
 
 left={

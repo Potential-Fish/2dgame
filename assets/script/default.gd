@@ -7,4 +7,4 @@ func _ready() -> void:
 	current_weapon = weapon_default
 	print(current_weapon.damage)
 func _process(delta: float) -> void:
-	print(current_weapon)
+	pass	
