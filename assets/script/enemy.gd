@@ -39,12 +39,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		var damage = player.weapon.current_weapon.damage
 		enemy.direction = Vector2(area.global_position - global_position).normalized()
 		$CPUParticles2D.direction = -1 * Vector2(area.global_position - global_position).normalized()
-		$CPUParticles2D.emitting = true
 		take_damage(damage)
 		
 		enemy.apply_knockback(enemy.direction,400,0.18)
 func take_damage(damage:int):
+	
+	$CPUParticles2D.emitting = true
 	stats.health -= damage
-	Hitstop.hit_stop()
+	Hitstop.hit_stop(self)
+	
 	if stats.health <= 0:
 		queue_free()

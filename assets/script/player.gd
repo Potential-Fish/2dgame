@@ -78,7 +78,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		direction = Vector2(area.global_position - global_position).normalized()
 		
-		apply_knockback(direction,400,0.12)
+		apply_knockback(direction,800,0.12)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

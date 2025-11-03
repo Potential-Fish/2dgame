@@ -18,6 +18,7 @@ size = Vector2(128.5, 121)
 size = Vector2(133, 134)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+modulate = Color(0.99969536, 0.99969536, 0.99969536, 0.98039216)
 script = ExtResource("1_qukd2")
 stats = ExtResource("2_bd7ao")
 

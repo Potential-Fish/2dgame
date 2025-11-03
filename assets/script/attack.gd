@@ -16,7 +16,7 @@ func enter():
 	
 
 func update(_delta:float):
-
+	
 	if is_attacking == false:
 		if player.is_on_floor() == false:
 		
@@ -26,13 +26,14 @@ func update(_delta:float):
 			sprite.animation = "attack_mov"
 			is_attacking = true
 func physics_update(delta):
-	if player.is_on_floor():
+	if player.is_on_floor() and sprite.animation == "jump attack":
 		player.velocity.x = lerpf(player.velocity.x,0,0.1)
-	
-
+		state_machine.change_state("idle")
+		
 func _on_sprite_2d_animation_finished() -> void:
 		state_machine.change_state("idle")
-		attack_hitbox.hide()
-		attack_hitbox.collision.disabled = true
+		
 func exit():
 	is_attacking = false
+	attack_hitbox.hide()
+	attack_hitbox.collision.disabled = true
